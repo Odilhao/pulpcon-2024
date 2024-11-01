@@ -102,7 +102,7 @@ gantt
 # Building Information
 
 <div grid="~ cols-2 gap-2" m="-t-2">
-<div>
+<div v-click>>
 
 - Which Build Systems are support?
   - Setuptools
@@ -113,7 +113,7 @@ gantt
 
 </div>
 
-<div>
+<div v-click>>
 
 * Only Python 3.11 is supported now
   * Until EL10 - Rebuild for 3.12
@@ -133,7 +133,7 @@ gantt
 # How fast can we go?
 
 <div grid="~ cols-2 gap-2" m="-t-2">
-<div>
+<div v-click>>
 
 
 * New Pulp bits being released in hours
@@ -145,7 +145,7 @@ gantt
 
 </div>
 
-<div>
+<div v-click>>
 
 ![Relampago Marquinhos](https://media1.tenor.com/m/l6CJxGWdYAoAAAAd/speed-i-am-speed.gif)
 
