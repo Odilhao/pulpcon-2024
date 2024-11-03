@@ -172,9 +172,9 @@ gantt
 
 <div v-click>
 
-![Github PR Bump](images/update-bot-pulp.png)
+![Github PR Bump](/images/update-bot-pulp.png)
 
-![Github Action Run](images/gh-action-run.png)
+![Github Action Run](/images/gh-action-run.png)
 
 </div>
 </div>
