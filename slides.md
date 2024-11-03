@@ -8,7 +8,7 @@ themeConfig:
 #theme: apple-basic
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://unsplash.com/collections/94734566/slidev
+# background: https://sli.dev/demo-cover.pngq
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
@@ -17,7 +17,6 @@ author: Odilon Sousa
 selectable: true
 colorSchema: 'dark'
 favicon: 'https://pulpproject.org/pulpcore/docs/assets/pulp_logo_big.png'
-
 ---
 
 # Pulpcon - 2024
@@ -32,7 +31,7 @@ layout: intro
 
 - Odilon Sousa
   - Senior Software Engineer at Red Hat
-  - Primarily working with RPM packagingr
+  - Still working with RPM packaging
     - Foreman/Katello/Pulp
 
 ---
@@ -55,14 +54,15 @@ layout: intro
 - Packaged Versions
   - Nightly - Based on last supported for Katello
   - 3.49
-  - 3.61 - For Weeks
+  - 3.61 - For 3 Weeks
   - 3.63
 
 </div>
 </div>
 
 ---
-
+layout: center
+---
 # Timeline
 
 <div v-click>
@@ -102,9 +102,9 @@ gantt
 # Building Information
 
 <div grid="~ cols-2 gap-2" m="-t-2">
-<div v-click>>
+<div v-click>
 
-- Which Build Systems are support?
+- Supported Build Systems
   - Setuptools
   - Poetry
   - Maturin
@@ -113,7 +113,7 @@ gantt
 
 </div>
 
-<div v-click>>
+<div v-click>
 
 * Only Python 3.11 is supported now
   * Until EL10 - Rebuild for 3.12
@@ -133,7 +133,7 @@ gantt
 # How fast can we go?
 
 <div grid="~ cols-2 gap-2" m="-t-2">
-<div v-click>>
+<div v-click>
 
 
 * New Pulp bits being released in hours
@@ -152,10 +152,103 @@ gantt
 </div>
 
 </div>
+
 ---
+
+# Auto Update
+
+<div grid="~ cols-2 gap-2" m="-t-8">
+<div v-click>
+
+
+* Workflow based update on GitHub
+  * Installs Pulp from [automation/requirements.txt](https://github.com/theforeman/pulpcore-packaging/blob/rpm/develop/automation/requirements.txt)
+  * Detects what is packaged
+    * if one lib is out of date a PR will be created
+  * Creates Jobs using a Matrix with updated libs
+    * The PRs runs one Scratch Build against nightly
+  * 150+ PRs created and merged since - Sep 10 2024
+</div>
+
+<div v-click>
+
+![Github PR Bump](images/update-bot-pulp.png)
+
+![Github Action Run](images/gh-action-run.png)
+
+</div>
+</div>
+
+
+---
+
+# Using dependabot to automate Pulp Builds
+
+<div grid="~ cols-2 gap-2" m="-t-2">
+<div v-click>
+
+* Dependabot tracks the current branched version of Pulp
+  * Runs daily or ad-hoc
+  * Creates one new PR
+    * Tests using github-actions
+  * After Merge one workflow auto bump the specfile.
+
+
+</div>
+
+
+<div v-click>
+
+```yaml  
+    groups:
+       pulp-cli-deps:
+          applies-to: version-updates
+          patterns:
+            - "pulp-cli"
+            - "pulp-glue"
+       pulp-cli-deb-deps:
+          applies-to: version-updates
+          patterns:
+            - "pulp-cli-deb"
+            - "pulp-glue-deb"
+    labels:
+      - "dependabot"
+    ignore:
+      - dependency-name: "pulpcore*"
+        update-types: ["version-update:semver-minor"]
+      - dependency-name: "pulp-rpm*"
+        update-types: ["version-update:semver-minor"]
+      - dependency-name: "pulp-ostree"
+        update-types: ["version-update:semver-minor"]
+```
+
+</div>
+
+</div>
+
 
 ---
 layout: center
+---
+# Cool Stats
+
+* Dependabot created 62 Commits since April of 2024
+  * Dependabot is now on 3rd place after **packaging@theforeman.org** that holds **183** commits against **rpm/develop**
+* boto3/botocore and grpcio releases weekly and this makes **packaging@theforeman.org** stats inflated.
+* We got 83 packages using **%pyproject_install** aka not tied to setup.py/cfg.
+
+
+---
+layout: center
+---
+
+# Plans for next year
+
+* Move packaging scratch and release out of Jenkins.
+* Add Dependabot workflow to supported releases like 3.49/3.63.
+* Rebuild on top of Python 3.12
+* Use [Rich Dependencies](https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Automatically-generated-dependencies) as much as possible
+
 ---
 
 # Questions?
