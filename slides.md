@@ -233,9 +233,12 @@ layout: center
 # Cool Stats
 
 * Dependabot created 62 Commits since April of 2024
-  * Dependabot is now on 3rd place after **packaging@theforeman.org** that holds **183** commits against **rpm/develop**
+  * Dependabot is now on 3rd place after **packaging@theforeman.org** that holds **184** commits against **rpm/develop**
 * boto3/botocore and grpcio releases weekly and this makes **packaging@theforeman.org** stats inflated.
 * We got 83 packages using **%pyproject_install** aka not tied to setup.py/cfg.
+* **278** Packages for **3.39**
+* **280** Packages for **3.49**
+* **293** Packages for **3.63**
 
 
 ---
